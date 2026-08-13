@@ -1,3 +1,5 @@
+
+
 # 98毅行路线难度评分系统
 
 ## 环境搭建
@@ -10,7 +12,7 @@ conda activate router98
 
 ## 调试运行
 ```
-pyhton run.py
+python run.py
 ```
 
 ## 部署运行
