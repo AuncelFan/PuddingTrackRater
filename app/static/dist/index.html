@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PuddingTrackRater</title>
+  <script type="module" crossorigin src="./assets/index-CV_-5WZn.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DQreKB1r.css">
+</head>
+
+<body>
+    <a
+        class="github-link"
+        href="https://github.com/AuncelFan/PuddingTrackRater"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="在 GitHub 查看仓库"
+        aria-label="在 GitHub 查看 PuddingTrackRater 仓库"
+    >
+        <img id="githubMark" class="github-mark" alt="" aria-hidden="true" width="26" height="26" />
+    </a>
+
+    <main class="app-shell">
+        <header class="app-header">
+            <h1>PuddingTrackRater</h1>
+        </header>
+
+        <!-- 文件上传区域 -->
+        <section class="upload-box" id="uploadBox">
+            <div
+                class="drop-zone"
+                id="kmlDropZone"
+                role="button"
+                tabindex="0"
+                aria-controls="kmlFileInput"
+                aria-describedby="fileNameText"
+                aria-label="选择或拖放 KML 文件"
+            >
+                <input type="file" id="kmlFileInput" accept=".kml" class="file-input-hidden" />
+                <span class="upload-symbol" aria-hidden="true">&#8679;</span>
+                <p class="drop-zone-title">拖放 KML 文件到这里</p>
+                <span class="custom-file-btn">选择文件</span>
+            </div>
+            <div class="selected-file-box" id="selectedFileBox" hidden>
+                <span class="selected-file-symbol" aria-hidden="true">&#128196;</span>
+                <span id="fileNameText" class="selected-file-name">未选择文件</span>
+                <button type="button" id="clearFileBtn" class="clear-file-btn">取消选择</button>
+            </div>
+            <button type="button" id="parseBtn" disabled>解析文件</button>
+        </section>
+
+        <section class="history-panel" id="historyPanel" aria-labelledby="historyTitle" hidden>
+            <div class="history-header">
+                <h2 id="historyTitle">最近记录</h2>
+                <button type="button" id="clearHistoryBtn" class="clear-history-btn">清空记录</button>
+            </div>
+            <ul class="history-list" id="historyList"></ul>
+        </section>
+
+        <!-- 状态提示区域 -->
+        <div id="statusText" class="tip" aria-live="polite"></div>
+
+        <!-- 解析结果展示区域 -->
+        <div id="resultArea" style="display: none;">
+            <div class="result-title">
+                <div class="result-title-text">解析结果</div>
+                <div class="result-btn" id="show-speed-btn">显示/关闭时间信息</div>
+                <div class="result-btn" id="save-result-btn">复制为图片</div>
+            </div>
+            <div id="result-info">
+                <div class="result-grid-wrap">
+                    <div class="result-item">总距离: <span id="total_distance_km"></span></div>
+                    <div class="result-item">总爬升: <span id="total_elevation_m"></span></div>
+                </div>
+                <div class="result-grid-wrap-2" id="time-info" hidden>
+                    <div class="result-item">总耗时: <span id="total_time_h"></span></div>
+                    <div class="result-item">平均速度: <span id="speed_mean_km_h"></span></div>
+                </div>
+                <div class="result-grid-wrap-3">
+                    <div class="result-item">体能等级: <span id="tired_level"></span></div>
+                    <div class="result-item">陡峭指数: <span id="elev_level"></span></div>
+                </div>
+                <div class="difficulty-container">
+                    <div class="difficulty-meter">
+                        <div class="difficulty-bar" id="diffBar">
+                            <div class="difficulty-labels">
+                                <span class="label-text">简单</span>
+                                <span class="label-text">普通</span>
+                                <span class="label-text">困难</span>
+                                <span class="label-text">极难</span>
+                            </div>
+                        </div>
+                        <div class="difficulty-arrow" id="diffArrow"></div>
+                        <div class="difficulty-value" id="diffValue"></div>
+                        <div class="difficulty-scale" id="diffScale"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 地图展示区域 -->
+        <div id="map"></div>
+    </main>
+
+</body>
+
+</html>

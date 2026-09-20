@@ -1,0 +1,726 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #26313d;
+    min-height: 100vh;
+}
+
+.github-link {
+    position: fixed;
+    top: max(16px, env(safe-area-inset-top));
+    left: max(16px, env(safe-area-inset-left));
+    z-index: 100;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 1px 4px rgba(31, 41, 55, 0.12);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.github-link:hover {
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(31, 41, 55, 0.2);
+    transform: translateY(-1px);
+}
+
+.github-link:focus-visible {
+    outline: 3px solid rgba(49, 120, 198, 0.35);
+    outline-offset: 2px;
+}
+
+.github-mark {
+    display: block;
+    width: 26px;
+    height: 26px;
+    opacity: 0.82;
+    transition: opacity 0.2s ease;
+}
+
+.github-link:hover .github-mark,
+.github-link:focus-visible .github-mark {
+    opacity: 1;
+}
+
+.app-shell {
+    width: min(100%, 880px);
+    margin: 44px auto;
+    padding: 0 20px 60px;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+h1 {
+    color: #243447;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.selected-file-box {
+    width: 100%;
+    min-height: 56px;
+    padding: 8px 12px;
+    border: 1px solid #b8c7d5;
+    border-radius: 8px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selected-file-box[hidden],
+.drop-zone[hidden] {
+    display: none;
+}
+
+.selected-file-symbol {
+    color: #0f766e;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.selected-file-name {
+    min-width: 0;
+    flex: 1;
+    color: #26313d;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.clear-file-btn {
+    flex: 0 0 auto;
+    padding: 7px 12px;
+    border: 1px solid #b8c7d5;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #526273;
+    cursor: pointer;
+    font-size: 14px;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.clear-file-btn:hover,
+.clear-file-btn:focus-visible {
+    border-color: #dc3545;
+    background: #fff5f5;
+    color: #dc3545;
+}
+
+.clear-file-btn:disabled {
+    cursor: wait;
+    opacity: 0.55;
+}
+
+.drop-zone {
+    width: 100%;
+    min-height: 300px;
+    padding: 32px;
+    border: 2px dashed #aab6c3;
+    border-radius: 8px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: min-height 0.2s ease, padding 0.2s ease, border-color 0.2s ease,
+        background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.drop-zone:hover,
+.drop-zone:focus-visible {
+    border-color: #3178c6;
+    background: #f6faff;
+    box-shadow: 0 0 0 3px rgba(49, 120, 198, 0.14);
+}
+
+.drop-zone.is-dragging {
+    border-color: #0f766e;
+    background: #eefbf8;
+    box-shadow: inset 0 0 0 2px rgba(15, 118, 110, 0.12);
+}
+
+.upload-symbol {
+    color: #3178c6;
+    font-family: Arial, sans-serif;
+    font-size: 46px;
+    line-height: 1;
+}
+
+.drop-zone.is-dragging .upload-symbol {
+    color: #0f766e;
+}
+
+.drop-zone-title {
+    color: #26313d;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.file-input-hidden {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    z-index: -1;
+}
+
+.custom-file-btn {
+    display: inline-flex;
+    min-height: 40px;
+    padding: 9px 22px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.drop-zone:hover .custom-file-btn,
+.drop-zone:focus-visible .custom-file-btn {
+    background-color: #0056b3;
+}
+
+.file-name-text {
+    font-size: 14px;
+    color: #6c757d;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#parseBtn {
+    min-width: 180px;
+    min-height: 44px;
+    padding: 10px 24px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+#parseBtn:hover {
+    background-color: #0056b3;
+}
+
+#parseBtn:disabled {
+    background-color: #aeb8c2;
+    cursor: not-allowed;
+}
+
+#parseBtn[aria-busy="true"] {
+    cursor: progress;
+}
+
+/* 状态提示区域 */
+#statusText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    height: 50px;
+    text-align: center;
+}
+
+.tip {
+    color: #6c757d;
+}
+
+.loading {
+    color: #007bff;
+}
+
+.error {
+    color: #dc3545;
+}
+
+.success {
+    color: #28a745;
+}
+
+.warning {
+    color: #a15c00;
+}
+
+.history-panel {
+    margin-top: 24px;
+}
+
+.history-panel[hidden] {
+    display: none;
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.history-header h2 {
+    color: #344454;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.clear-history-btn,
+.history-delete-btn {
+    border: 0;
+    background: transparent;
+    color: #657484;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.clear-history-btn:hover,
+.clear-history-btn:focus-visible,
+.history-delete-btn:hover,
+.history-delete-btn:focus-visible {
+    color: #c92a3a;
+    text-decoration: underline;
+}
+
+.history-list {
+    --history-row-height: 58px;
+    list-style: none;
+    max-height: calc(var(--history-row-height) * 4 + 1px);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+    border-top: 1px solid #dfe5eb;
+}
+
+.history-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    height: var(--history-row-height);
+    border-bottom: 1px solid #dfe5eb;
+}
+
+.history-open-btn {
+    min-width: 0;
+    padding: 9px 12px 9px 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    text-align: left;
+}
+
+.history-open-btn:hover .history-file-name,
+.history-open-btn:focus-visible .history-file-name {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.history-file-name {
+    max-width: 100%;
+    overflow: hidden;
+    color: #26313d;
+    font-size: 14px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.history-meta {
+    color: #6c7885;
+    font-size: 12px;
+}
+
+/* 解析结果展示区域美化 */
+#resultArea {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.result-grid-wrap,
+.result-grid-wrap-2,
+.result-grid-wrap-3 {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.result-grid-wrap-2[hidden] {
+    display: none;
+}
+
+.result-title {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    /* 新增：标题和内容间距 */
+}
+
+.result-title-text {
+    color: #28a745;
+    font-size: 20px;
+    /* 修正：20px 结果标题 */
+    align-self: flex-start;
+}
+
+.result-btn {
+    font-size: 14px;
+    padding: 6px 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
+    align-self: flex-start;
+    border: none;
+    border-radius: 9px;
+    transition: background-color 0.2s;
+}
+
+.result-btn:hover {
+    background-color: #0056b3;
+}
+
+.result-item {
+    font-size: 16px;
+    color: #2c3e50;
+    margin: 5px 0;
+    width: 35%;
+}
+
+.result-item span {
+    font-weight: 600;
+    color: #007bff;
+    margin-left: 6px;
+}
+
+/* 难度条容器 */
+.difficulty-container {
+    display: none;
+    background: #fff;
+    padding-top: 10px;
+}
+
+.difficulty-meter {
+    position: relative;
+    width: 85%;
+    margin: 30px auto 0;
+    padding-bottom: 28px;
+}
+
+.difficulty-bar {
+    position: relative;
+    width: 100%;
+    height: 25px;
+    border-radius: 15px;
+    /* 核心：难度色相渐变 从轻→重 */
+    background: linear-gradient(90deg,
+            #4ade80,
+            #a3e635,
+            #facc15,
+            #fbbf24,
+            #f97316,
+            #f43f5e,
+            #e11d48,
+            #be123c,
+            #9f1239,
+            #7f1d1d);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 区间标签 */
+.difficulty-labels {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    pointer-events: none;
+}
+
+.label-text {
+    font-size: 14px;
+    /* 修正：14px 刻度标签 */
+    color: #ffffff;
+    font-weight: 500;
+    text-align: center;
+    text-shadow:
+        -1px -1px 0.5px #000,
+        1px -1px 0.5px #000,
+        -1px 1px 0.5px #000,
+        1px 1px 0.5px #000;
+}
+
+.difficulty-arrow {
+    position: absolute;
+    left: 0;
+    top: -17px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 18px solid #1e40af;
+    cursor: pointer;
+    transition: border-top-color 0.2s;
+    z-index: 10;
+}
+
+.difficulty-arrow:hover {
+    border-top-color: #3b82f6;
+}
+
+/* 箭头下方的当前难度值文本 */
+.difficulty-value {
+    position: absolute;
+    left: 0;
+    top: -42px;
+    transform: translateX(-50%);
+    color: #1e40af;
+    font-size: 16px;
+    /* 修正：16px 难度值 */
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* 1-10刻度标尺容器 */
+.difficulty-scale {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+}
+
+/* 刻度数字样式 */
+.scale-num {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.scale-num::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: 1px;
+    height: 4px;
+    background: #9ca3af;
+}
+
+/* 弹出提示样式 */
+.pop-container {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: #888888 0px 0px 5px 0px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    /* 修正：14px 弹窗提示 */
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pop-container.show {
+    opacity: 1;
+}
+
+#map {
+    width: 100%;
+    aspect-ratio: 1/1;
+    max-height: 300px;
+    display: none;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+
+/* 移动端适配（<=600px）*/
+@media (max-width: 600px) {
+
+    .github-link {
+        top: max(10px, env(safe-area-inset-top));
+        left: max(10px, env(safe-area-inset-left));
+        width: 36px;
+        height: 36px;
+        box-shadow: none;
+    }
+
+    .github-mark {
+        width: 24px;
+        height: 24px;
+    }
+
+    .app-shell {
+        width: 100%;
+        margin: 20px auto;
+        padding: 0 12px;
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    .app-header {
+        margin-bottom: 20px;
+        padding: 0 44px;
+    }
+
+    .drop-zone {
+        min-height: 230px;
+        padding: 24px 16px;
+    }
+
+    .drop-zone-title {
+        font-size: 16px;
+    }
+
+    .selected-file-box {
+        min-height: 52px;
+        padding: 7px 9px;
+    }
+
+    .selected-file-name {
+        font-size: 14px;
+    }
+
+    .clear-file-btn {
+        padding: 6px 9px;
+        font-size: 13px;
+    }
+
+    .history-panel {
+        margin-top: 20px;
+    }
+
+    .history-list {
+        --history-row-height: 54px;
+    }
+
+    #parseBtn {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .file-name-text {
+        max-width: 100%;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    /* 状态提示 */
+    #statusText {
+        font-size: 14px;
+    }
+
+    /* 结果区 */
+    #resultArea {
+        padding: 15px 12px;
+    }
+
+    .result-title-text {
+        font-size: 16px;
+    }
+
+    .result-btn {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .result-item {
+        width: 50%;
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+    /* 难度条 */
+    .difficulty-container {
+        padding-top: 0;
+    }
+
+    .difficulty-meter {
+        width: 100%;
+        margin-top: 28px;
+    }
+
+    .difficulty-bar {
+        width: 100%;
+        height: 25px;
+    }
+
+    .difficulty-labels {
+        padding: 0 6px;
+    }
+
+    .difficulty-scale {
+        width: 100%;
+    }
+
+    .label-text,
+    .scale-num {
+        font-size: 12px;
+    }
+
+    .difficulty-arrow {
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-top: 14px solid #1e40af;
+    }
+
+    .difficulty-value {
+        font-size: 14px;
+    }
+
+    /* 弹窗 */
+    .pop-container {
+        top: 60px;
+        font-size: 13px;
+        padding: 8px 14px;
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "pudding-track-rater",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev:debug": "node --inspect-brk node_modules/vite/bin/vite.js"
+  },
+  "dependencies": {
+    "@primer/octicons": "^19.38.0",
+    "coordtransform": "^2.1.2",
+    "html-to-image": "^1.11.13",
+    "ol": "^10.7.0"
+  },
+  "devDependencies": {
+    "vite": "^7.3.0"
+  }
+}

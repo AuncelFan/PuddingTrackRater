@@ -1,0 +1,9 @@
+services:
+  pudding-track-rater:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pudding-track-rater:latest
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
