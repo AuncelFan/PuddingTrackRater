@@ -438,8 +438,9 @@ h1 {
 .difficulty-meter {
     position: relative;
     width: 85%;
-    margin: 30px auto 0;
-    padding-bottom: 28px;
+    margin: 22px auto 0;
+    padding-top: 34px;
+    padding-bottom: 30px;
 }
 
 .difficulty-bar {
@@ -489,7 +490,7 @@ h1 {
 .difficulty-arrow {
     position: absolute;
     left: 0;
-    top: -17px;
+    top: 16px;
     transform: translateX(-50%);
     width: 0;
     height: 0;
@@ -509,7 +510,7 @@ h1 {
 .difficulty-value {
     position: absolute;
     left: 0;
-    top: -42px;
+    top: -10px;
     transform: translateX(-50%);
     color: #1e40af;
     font-size: 16px;
@@ -526,6 +527,14 @@ h1 {
     display: flex;
     justify-content: space-between;
     height: 20px;
+}
+
+.difficulty-credit {
+    margin: 2px 0 0;
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
 }
 
 /* 刻度数字样式 */
@@ -686,7 +695,9 @@ h1 {
 
     .difficulty-meter {
         width: 100%;
-        margin-top: 28px;
+        margin-top: 24px;
+        padding-top: 30px;
+        padding-bottom: 27px;
     }
 
     .difficulty-bar {
@@ -708,13 +719,20 @@ h1 {
     }
 
     .difficulty-arrow {
+        top: 14px;
         border-left: 9px solid transparent;
         border-right: 9px solid transparent;
         border-top: 14px solid #1e40af;
     }
 
     .difficulty-value {
+        top: -8px;
         font-size: 14px;
+    }
+
+    .difficulty-credit {
+        margin-top: 3px;
+        font-size: 11px;
     }
 
     /* 弹窗 */
